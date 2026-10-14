@@ -11,5 +11,17 @@
  {"file": "bed-review.html", "title": "Bed collocations", "emoji": "🛏️", "count": 12},
  {"file": "bedroom-items-review.html", "title": "Sheets, alarm & curtains collocations", "emoji": "⏰", "count": 12},
  {"file": "bath-shower-review.html", "title": "Bath & shower collocations", "emoji": "🛁", "count": 12},
- {"file": "towel-toilet-review.html", "title": "Towel & toilet collocations", "emoji": "🚽", "count": 12}
+ {"file": "towel-toilet-review.html", "title": "Towel & toilet collocations", "emoji": "🚽", "count": 12},
+ {"file": "kitchen-appliances-review.html", "title": "Kitchen appliances collocations", "emoji": "🍳", "count": 12},
+ {"file": "knife-fork-spoon-review.html", "title": "Knife, fork & spoon collocations", "emoji": "🍴", "count": 12},
+ {"file": "cupboard-shelf-review.html", "title": "Cupboard & shelf collocations", "emoji": "🗄️", "count": 12},
+ {"file": "pot-pan-review.html", "title": "Pot & pan collocations", "emoji": "🍲", "count": 12},
+ {"file": "plate-bowl-review.html", "title": "Plate & bowl collocations", "emoji": "🥣", "count": 12},
+ {"file": "sink-dishes-review.html", "title": "Sink & dishes collocations", "emoji": "🚰", "count": 12},
+ {"file": "sky-sun-review.html", "title": "Sky & sun collocations", "emoji": "☀️", "count": 12},
+ {"file": "moon-star-review.html", "title": "Moon & star collocations", "emoji": "🌙", "count": 12},
+ {"file": "rain-thunder-review.html", "title": "Rain, thunder & lightning collocations", "emoji": "⛈️", "count": 12},
+ {"file": "cloud-fog-review.html", "title": "Cloud & fog collocations", "emoji": "☁️", "count": 12},
+ {"file": "snow-ice-review.html", "title": "Snow & ice collocations", "emoji": "❄️", "count": 12},
+ {"file": "wind-review.html", "title": "Wind collocations", "emoji": "🌬️", "count": 12}
 ]

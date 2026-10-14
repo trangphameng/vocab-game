@@ -9,12 +9,12 @@
 /* Layout: one centred column, a card per game */
 :root{
   --bg:#f3f6fb; --card:#ffffff; --fg:#1e293b; --muted:#64748b; --line:#dbe3ef;
-  --house:#0d9488; --stairs:#8b5cf6; --room:#3b82f6; --floor-carpet:#ea580c; --wall-ceiling:#e11d48; --door-light:#b45309; --window-heating:#6366f1; --table-drawer:#db2777; --chair-mirror:#0891b2; --bed:#c026d3; --bedroom-items:#0d9488; --bath-shower:#8b5cf6; --towel-toilet:#3b82f6;
+  --house:#0d9488; --stairs:#8b5cf6; --room:#3b82f6; --floor-carpet:#ea580c; --wall-ceiling:#e11d48; --door-light:#b45309; --window-heating:#6366f1; --table-drawer:#db2777; --chair-mirror:#0891b2; --bed:#c026d3; --bedroom-items:#0d9488; --bath-shower:#8b5cf6; --towel-toilet:#3b82f6; --kitchen-appliances:#0d9488; --knife-fork-spoon:#8b5cf6; --cupboard-shelf:#3b82f6; --pot-pan:#f97316; --plate-bowl:#e11d48; --sink-dishes:#0891b2; --sky-sun:#6366f1; --moon-star:#b45309; --rain-thunder:#db2777; --cloud-fog:#0d9488; --snow-ice:#3b82f6; --wind:#8b5cf6;
   --font:"Nunito","Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#0b1220; --card:#131c2e; --fg:#e2e8f0; --muted:#94a3b8; --line:#26334d;
-  --house:#2dd4bf; --stairs:#a78bfa; --room:#60a5fa; --floor-carpet:#fb923c; --wall-ceiling:#fb7185; --door-light:#fbbf24; --window-heating:#a5b4fc; --table-drawer:#f472b6; --chair-mirror:#22d3ee; --bed:#e879f9; --bedroom-items:#2dd4bf; --bath-shower:#a78bfa; --towel-toilet:#60a5fa; color-scheme:dark}}
+  --house:#2dd4bf; --stairs:#a78bfa; --room:#60a5fa; --floor-carpet:#fb923c; --wall-ceiling:#fb7185; --door-light:#fbbf24; --window-heating:#a5b4fc; --table-drawer:#f472b6; --chair-mirror:#22d3ee; --bed:#e879f9; --bedroom-items:#2dd4bf; --bath-shower:#a78bfa; --towel-toilet:#60a5fa; --kitchen-appliances:#2dd4bf; --knife-fork-spoon:#a78bfa; --cupboard-shelf:#60a5fa; --pot-pan:#fb923c; --plate-bowl:#fb7185; --sink-dishes:#22d3ee; --sky-sun:#a5b4fc; --moon-star:#fbbf24; --rain-thunder:#f472b6; --cloud-fog:#2dd4bf; --snow-ice:#60a5fa; --wind:#a78bfa; color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);padding:32px 16px}
 .wrap{max-width:520px;margin:0 auto;display:grid;gap:14px}
@@ -41,6 +41,18 @@ a.bed:hover{border-color:var(--bed)} a.bed .go{color:var(--bed)}
 a.bedroom-items:hover{border-color:var(--bedroom-items)} a.bedroom-items .go{color:var(--bedroom-items)}
 a.bath-shower:hover{border-color:var(--bath-shower)} a.bath-shower .go{color:var(--bath-shower)}
 a.towel-toilet:hover{border-color:var(--towel-toilet)} a.towel-toilet .go{color:var(--towel-toilet)}
+a.kitchen-appliances:hover{border-color:var(--kitchen-appliances)} a.kitchen-appliances .go{color:var(--kitchen-appliances)}
+a.knife-fork-spoon:hover{border-color:var(--knife-fork-spoon)} a.knife-fork-spoon .go{color:var(--knife-fork-spoon)}
+a.cupboard-shelf:hover{border-color:var(--cupboard-shelf)} a.cupboard-shelf .go{color:var(--cupboard-shelf)}
+a.pot-pan:hover{border-color:var(--pot-pan)} a.pot-pan .go{color:var(--pot-pan)}
+a.plate-bowl:hover{border-color:var(--plate-bowl)} a.plate-bowl .go{color:var(--plate-bowl)}
+a.sink-dishes:hover{border-color:var(--sink-dishes)} a.sink-dishes .go{color:var(--sink-dishes)}
+a.sky-sun:hover{border-color:var(--sky-sun)} a.sky-sun .go{color:var(--sky-sun)}
+a.moon-star:hover{border-color:var(--moon-star)} a.moon-star .go{color:var(--moon-star)}
+a.rain-thunder:hover{border-color:var(--rain-thunder)} a.rain-thunder .go{color:var(--rain-thunder)}
+a.cloud-fog:hover{border-color:var(--cloud-fog)} a.cloud-fog .go{color:var(--cloud-fog)}
+a.snow-ice:hover{border-color:var(--snow-ice)} a.snow-ice .go{color:var(--snow-ice)}
+a.wind:hover{border-color:var(--wind)} a.wind .go{color:var(--wind)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -64,6 +76,18 @@ a.towel-toilet:hover{border-color:var(--towel-toilet)} a.towel-toilet .go{color:
   <a class="game bedroom-items" href="bedroom-items-review.html"><div class="e">⏰</div><div><b>Sheets, alarm &amp; curtains collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
   <a class="game bath-shower" href="bath-shower-review.html"><div class="e">🛁</div><div><b>Bath &amp; shower collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
   <a class="game towel-toilet" href="towel-toilet-review.html"><div class="e">🚽</div><div><b>Towel &amp; toilet collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game kitchen-appliances" href="kitchen-appliances-review.html"><div class="e">🍳</div><div><b>Kitchen appliances collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game knife-fork-spoon" href="knife-fork-spoon-review.html"><div class="e">🍴</div><div><b>Knife, fork &amp; spoon collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game cupboard-shelf" href="cupboard-shelf-review.html"><div class="e">🗄️</div><div><b>Cupboard &amp; shelf collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game pot-pan" href="pot-pan-review.html"><div class="e">🍲</div><div><b>Pot &amp; pan collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game plate-bowl" href="plate-bowl-review.html"><div class="e">🥣</div><div><b>Plate &amp; bowl collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game sink-dishes" href="sink-dishes-review.html"><div class="e">🚰</div><div><b>Sink &amp; dishes collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game sky-sun" href="sky-sun-review.html"><div class="e">☀️</div><div><b>Sky &amp; sun collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game moon-star" href="moon-star-review.html"><div class="e">🌙</div><div><b>Moon &amp; star collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game rain-thunder" href="rain-thunder-review.html"><div class="e">⛈️</div><div><b>Rain, thunder &amp; lightning collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game cloud-fog" href="cloud-fog-review.html"><div class="e">☁️</div><div><b>Cloud &amp; fog collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game snow-ice" href="snow-ice-review.html"><div class="e">❄️</div><div><b>Snow &amp; ice collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game wind" href="wind-review.html"><div class="e">🌬️</div><div><b>Wind collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
 </main>
 </body>
 </html>
