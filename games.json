@@ -1,5 +1,15 @@
 [
- {"file":"house-review.html","title":"House collocations","emoji":"🏠","count":12},
- {"file":"stairs-review.html","title":"Stairs collocations","emoji":"🪜","count":10},
- {"file":"room-review.html","title":"Room collocations","emoji":"🚪","count":12}
+ {"file": "house-review.html", "title": "House collocations", "emoji": "🏠", "count": 12},
+ {"file": "stairs-review.html", "title": "Stairs collocations", "emoji": "🪜", "count": 10},
+ {"file": "room-review.html", "title": "Room collocations", "emoji": "🚪", "count": 12},
+ {"file": "floor-carpet-review.html", "title": "Floor & carpet collocations", "emoji": "🧹", "count": 12},
+ {"file": "wall-ceiling-review.html", "title": "Wall & ceiling collocations", "emoji": "🧱", "count": 12},
+ {"file": "door-light-review.html", "title": "Door & light collocations", "emoji": "💡", "count": 12},
+ {"file": "window-heating-review.html", "title": "Window & heating collocations", "emoji": "🪟", "count": 12},
+ {"file": "table-drawer-review.html", "title": "Table & drawer collocations", "emoji": "🍽️", "count": 12},
+ {"file": "chair-mirror-review.html", "title": "Chair & mirror collocations", "emoji": "🪑", "count": 12},
+ {"file": "bed-review.html", "title": "Bed collocations", "emoji": "🛏️", "count": 12},
+ {"file": "bedroom-items-review.html", "title": "Sheets, alarm & curtains collocations", "emoji": "⏰", "count": 12},
+ {"file": "bath-shower-review.html", "title": "Bath & shower collocations", "emoji": "🛁", "count": 12},
+ {"file": "towel-toilet-review.html", "title": "Towel & toilet collocations", "emoji": "🚽", "count": 12}
 ]

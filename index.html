@@ -9,12 +9,12 @@
 /* Layout: one centred column, a card per game */
 :root{
   --bg:#f3f6fb; --card:#ffffff; --fg:#1e293b; --muted:#64748b; --line:#dbe3ef;
-  --house:#0d9488; --stairs:#8b5cf6; --room:#3b82f6;
+  --house:#0d9488; --stairs:#8b5cf6; --room:#3b82f6; --floor-carpet:#ea580c; --wall-ceiling:#e11d48; --door-light:#b45309; --window-heating:#6366f1; --table-drawer:#db2777; --chair-mirror:#0891b2; --bed:#c026d3; --bedroom-items:#0d9488; --bath-shower:#8b5cf6; --towel-toilet:#3b82f6;
   --font:"Nunito","Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#0b1220; --card:#131c2e; --fg:#e2e8f0; --muted:#94a3b8; --line:#26334d;
-  --house:#2dd4bf; --stairs:#a78bfa; --room:#60a5fa; color-scheme:dark}}
+  --house:#2dd4bf; --stairs:#a78bfa; --room:#60a5fa; --floor-carpet:#fb923c; --wall-ceiling:#fb7185; --door-light:#fbbf24; --window-heating:#a5b4fc; --table-drawer:#f472b6; --chair-mirror:#22d3ee; --bed:#e879f9; --bedroom-items:#2dd4bf; --bath-shower:#a78bfa; --towel-toilet:#60a5fa; color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);padding:32px 16px}
 .wrap{max-width:520px;margin:0 auto;display:grid;gap:14px}
@@ -31,6 +31,16 @@ a.game .go{margin-left:auto;font-weight:900;font-size:1.3rem}
 a.house:hover{border-color:var(--house)} a.house .go{color:var(--house)}
 a.stairs:hover{border-color:var(--stairs)} a.stairs .go{color:var(--stairs)}
 a.room:hover{border-color:var(--room)} a.room .go{color:var(--room)}
+a.floor-carpet:hover{border-color:var(--floor-carpet)} a.floor-carpet .go{color:var(--floor-carpet)}
+a.wall-ceiling:hover{border-color:var(--wall-ceiling)} a.wall-ceiling .go{color:var(--wall-ceiling)}
+a.door-light:hover{border-color:var(--door-light)} a.door-light .go{color:var(--door-light)}
+a.window-heating:hover{border-color:var(--window-heating)} a.window-heating .go{color:var(--window-heating)}
+a.table-drawer:hover{border-color:var(--table-drawer)} a.table-drawer .go{color:var(--table-drawer)}
+a.chair-mirror:hover{border-color:var(--chair-mirror)} a.chair-mirror .go{color:var(--chair-mirror)}
+a.bed:hover{border-color:var(--bed)} a.bed .go{color:var(--bed)}
+a.bedroom-items:hover{border-color:var(--bedroom-items)} a.bedroom-items .go{color:var(--bedroom-items)}
+a.bath-shower:hover{border-color:var(--bath-shower)} a.bath-shower .go{color:var(--bath-shower)}
+a.towel-toilet:hover{border-color:var(--towel-toilet)} a.towel-toilet .go{color:var(--towel-toilet)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -44,6 +54,16 @@ a.room:hover{border-color:var(--room)} a.room .go{color:var(--room)}
   <a class="game house" href="house-review.html"><div class="e">🏠</div><div><b>House collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
   <a class="game stairs" href="stairs-review.html"><div class="e">🪜</div><div><b>Stairs collocations</b><span>10 expressions</span></div><div class="go">▶</div></a>
   <a class="game room" href="room-review.html"><div class="e">🚪</div><div><b>Room collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game floor-carpet" href="floor-carpet-review.html"><div class="e">🧹</div><div><b>Floor &amp; carpet collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game wall-ceiling" href="wall-ceiling-review.html"><div class="e">🧱</div><div><b>Wall &amp; ceiling collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game door-light" href="door-light-review.html"><div class="e">💡</div><div><b>Door &amp; light collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game window-heating" href="window-heating-review.html"><div class="e">🪟</div><div><b>Window &amp; heating collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game table-drawer" href="table-drawer-review.html"><div class="e">🍽️</div><div><b>Table &amp; drawer collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game chair-mirror" href="chair-mirror-review.html"><div class="e">🪑</div><div><b>Chair &amp; mirror collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game bed" href="bed-review.html"><div class="e">🛏️</div><div><b>Bed collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game bedroom-items" href="bedroom-items-review.html"><div class="e">⏰</div><div><b>Sheets, alarm &amp; curtains collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game bath-shower" href="bath-shower-review.html"><div class="e">🛁</div><div><b>Bath &amp; shower collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game towel-toilet" href="towel-toilet-review.html"><div class="e">🚽</div><div><b>Towel &amp; toilet collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
 </main>
 </body>
 </html>
