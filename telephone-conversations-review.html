@@ -1,0 +1,340 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}[hidden]{display:none!important}</style></head><body>
+<title>Telephone Conversations Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap">
+<style>
+/* Layout: one centred 520px game card, three screens swapped in place */
+:root{
+  --primary:#2563eb; --primary-light:color-mix(in srgb, #2563eb 14%, #ffffff);
+  --bg:color-mix(in srgb, #2563eb 6%, #f8fafc); --card:#ffffff; --fg:#1e293b; --muted:#64748b;
+  --line:color-mix(in srgb, #2563eb 18%, #e2e8f0);
+  --good:#16a34a; --good-bg:#dcfce7; --bad:#dc2626; --bad-bg:#fee2e2;
+  --font:"Nunito", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --primary:#60a5fa; --primary-light:color-mix(in srgb, #60a5fa 18%, #0f172a);
+  --bg:#0b1220; --card:#131c2e; --fg:#e2e8f0; --muted:#94a3b8; --line:#26334d;
+  --good:#4ade80; --good-bg:#14321f; --bad:#f87171; --bad-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --primary:#60a5fa; --primary-light:color-mix(in srgb, #60a5fa 18%, #0f172a);
+  --bg:#0b1220; --card:#131c2e; --fg:#e2e8f0; --muted:#94a3b8; --line:#26334d;
+  --good:#4ade80; --good-bg:#14321f; --bad:#f87171; --bad-bg:#3a1717; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;padding:24px 16px;min-height:100%}
+.wrap{max-width:520px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 10px 30px -18px color-mix(in srgb,var(--primary) 60%,transparent)}
+h1{font-weight:900;font-size:1.7rem;margin:0;text-wrap:balance;line-height:1.15}
+.sub{color:var(--muted);margin:6px 0 0}
+.big{font-size:3.2rem;line-height:1}
+label{display:block;font-weight:700;margin:16px 0 6px;font-size:.95rem}
+input[type=text],select{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--fg)}
+input[type=text]:focus,select:focus{outline:none;border-color:var(--primary)}
+.btn{font:inherit;font-weight:900;border:0;border-radius:14px;padding:13px 18px;background:var(--primary);color:#fff;cursor:pointer;width:100%;margin-top:18px;transition:transform .12s, opacity .2s}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:var(--primary-light);color:var(--primary)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700;font-size:.9rem;color:var(--muted)}
+.counts{display:flex;gap:10px}.counts b{font-variant-numeric:tabular-nums}
+.ok{color:var(--good)}.no{color:var(--bad)}
+.bar{height:8px;background:var(--primary-light);border-radius:99px;overflow:hidden;margin:10px 0 18px}
+.bar i{display:block;height:100%;background:var(--primary);width:0;transition:width .4s}
+.label{display:inline-block;background:var(--primary-light);color:var(--primary);font-weight:900;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.scene{font-size:2.6rem;text-align:center;margin:16px 0 6px;letter-spacing:6px}
+.clue{text-align:center;font-size:1.08rem;margin:0 0 16px}
+.frame{text-align:center;font-weight:900;font-size:1.3rem;margin:4px 0 4px}
+.frame span{color:var(--primary)}
+.hint{text-align:center;color:var(--muted);font-size:.9rem;margin:0 0 6px}
+.phrase{text-align:center;font-weight:900;font-size:1.6rem;margin:22px 0;color:var(--primary);text-wrap:balance}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{font:inherit;font-weight:700;padding:14px 10px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;min-width:0;transition:border-color .15s, background .15s}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.emo{font-size:2.3rem;padding:12px}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.fb{min-height:28px;text-align:center;font-weight:900;margin-top:14px}
+@keyframes pop{0%{transform:scale(.96);opacity:.4}100%{transform:scale(1);opacity:1}}
+.q{animation:pop .25s ease-out}
+.result{border:3px solid var(--primary);border-radius:20px;padding:20px;background:var(--card)}
+.rhead{display:flex;gap:12px;align-items:center}
+.score{font-size:2.6rem;font-weight:900;font-variant-numeric:tabular-nums;margin:12px 0 0}
+.pass{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0 4px}
+.pass i{display:block;height:100%}
+.meta{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+ul.log{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:4px}
+ul.log li{display:flex;gap:8px;font-size:.95rem}
+.status{margin-top:14px;padding:12px;border-radius:12px;font-weight:700;font-size:.93rem;background:var(--primary-light)}
+.status a.btn{display:block;text-align:center;text-decoration:none;margin-top:10px}
+@media (max-width:420px){.card{padding:18px}.scene{font-size:2.2rem}.opts{grid-template-columns:1fr}.opts.emoji{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.opts.list{grid-template-columns:1fr}
+.opts.list .opt{text-align:left;padding:12px 14px}
+.chat{display:flex;flex-direction:column;gap:8px;margin:14px 0 16px;padding:12px;border-radius:16px;background:var(--primary-light)}
+.msg{max-width:85%;padding:9px 12px;border-radius:14px;line-height:1.35;font-size:.97rem}
+.msg small{display:block;font-weight:900;font-size:.72rem;color:var(--muted);margin-bottom:2px}
+.msg.a{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.b{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:4px}
+.msg.b small{color:color-mix(in srgb,#fff 80%,transparent)}
+.msg.ask{background:transparent;border:2px dashed var(--primary);color:var(--primary);font-weight:900;animation:none}
+.msg.new{animation:pop .3s ease-out}
+.part{color:var(--muted);font-weight:700;font-size:.85rem;margin:8px 0 0}
+</style>
+
+<div class="wrap">
+  <!-- Welcome -->
+  <section class="card" id="welcome">
+    <div class="big">📞</div>
+    <h1 style="margin-top:10px">Telephone conversations</h1>
+    <p class="sub">Exercise 5 · Put the two phone calls in order, then practise the phone phrases. 15 questions.</p>
+    <form id="startForm">
+      <label for="name">Your name / Họ và tên</label>
+      <input type="text" id="name" autocomplete="name" placeholder="e.g. Nguyễn Minh Anh">
+      <label for="cls">Class / Lớp</label>
+      <select id="cls">
+        <option value="" selected disabled>— Chọn lớp —</option>
+        <option>A2</option><option>B1</option><option>B2</option><option>IELTS</option>
+        <option>Khác</option>
+      </select>
+      <button class="btn" id="startBtn" type="submit" disabled>Start ▶</button>
+    </form>
+  </section>
+
+  <!-- Game -->
+  <section class="card" id="game" hidden>
+    <div class="top"><span id="qnum"></span><span class="counts"><b class="ok">✓ <span id="cOk">0</span></b><b class="no">✗ <span id="cNo">0</span></b></span></div>
+    <div class="bar"><i id="prog"></i></div>
+    <div id="qbox"></div>
+    <div class="fb" id="fb" aria-live="polite"></div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" hidden>
+    <div class="result" id="rcard"></div>
+    <div id="status"></div>
+    <button class="btn ghost" id="copyBtn" type="button">📋 Copy result</button>
+    <button class="btn" id="againBtn" type="button">🔁 Play again</button>
+  </section>
+</div>
+
+<script>
+/* ===== Teacher settings: Google Form that collects results ===== */
+const RESULTS = {
+  "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeOg0kZytzgKzyBIxFD-THAoS44sTOEvDr4VqO1LnX-6kmfYQ/",
+  "fields": {
+    "name": "entry.1398331139",
+    "cls": "entry.770361974",
+    "lesson": "entry.449687323",
+    "score": "entry.426447052",
+    "details": "entry.1388890653"
+  }
+};
+
+const TOPIC = "Telephone conversations", TOPIC_EMOJI = "📞";
+const LESSON = "Telephone conversations – Exercise 5";
+
+/* The two conversations in the correct order. s: "a" = person answering, "b" = caller */
+const CONVOS = [
+  { title: "Conversation 1", who: { a: "🏠 Answering", b: "📱 Katherine" }, lines: [
+    { s: "a", t: "Hello?" },
+    { s: "b", t: "Hi, it's Katherine." },
+    { s: "a", t: "Hi, Katherine, how are you doing?" },
+    { s: "b", t: "Good, thanks. Could I speak to Lucas, please?" },
+    { s: "a", t: "I'm afraid he isn't here at the moment. Can I take a message, Katherine?" },
+    { s: "b", t: "Oh, it's nothing important, thanks. Just tell him I called." }
+  ]},
+  { title: "Conversation 2", who: { a: "🏢 Answering", b: "📱 Steve" }, lines: [
+    { s: "a", t: "Hello?" },
+    { s: "b", t: "Hello, could I speak to William, please?" },
+    { s: "a", t: "Sure. Who's calling, please?" },
+    { s: "b", t: "It's Steve Walsh, a colleague of William's." },
+    { s: "a", t: "OK, I'll get him for you." }
+  ]}
+];
+
+/* Phone phrases: pick4 uses opts (first = correct); type uses frame + key */
+const PHRASES = [
+  { word: "It's Katherine.", scene: "📱🙋‍♀️👋", clue: "Say who you are when you phone a friend.",
+    frame: "Hi, ___ Katherine.", key: "it's", opts: ["It's Katherine.", "Here is Katherine.", "I'm Katherine speaking you.", "This Katherine is."] },
+  { word: "Could I speak to William, please?", scene: "📞🙏👨‍💼", clue: "Ask politely to talk to William.",
+    frame: "Could I ___ to William, please?", key: "speak", opts: ["Could I speak to William, please?", "Can I speaking William?", "Give me William.", "I want talk William."] },
+  { word: "Who's calling, please?", scene: "📞❓🧑", clue: "Ask politely for the caller's name.",
+    frame: "Who's ___, please?", key: "calling", opts: ["Who's calling, please?", "Who are you?", "Who is speak, please?", "What your name is?"] },
+  { word: "I'm afraid he isn't here at the moment.", scene: "🚪🚶‍♂️🙁", clue: "Lucas is out. Say it politely.",
+    frame: "I'm ___ he isn't here at the moment.", key: "afraid", opts: ["I'm afraid he isn't here at the moment.", "He doesn't here now.", "He not here at the moment.", "I'm afraid he isn't at here."] },
+  { word: "Can I take a message?", scene: "📝✏️📞", clue: "Offer to write down what the caller wants to say.",
+    frame: "Can I ___ a message?", key: "take", opts: ["Can I take a message?", "Can I make a message?", "Can I do a message?", "Can I keep a message?"] },
+  { word: "OK, I'll get him for you.", scene: "🏃‍♀️👨‍💼📞", clue: "Say you will bring William to the phone.",
+    frame: "OK, I'll ___ him for you.", key: "get", opts: ["OK, I'll get him for you.", "OK, I'll take him to you.", "OK, I get him for you.", "OK, I'll catch him for you."] },
+  { word: "Just tell him I called.", scene: "💬👦📞", clue: "Ask someone to say to Lucas that you phoned.",
+    frame: "Just ___ him I called.", key: "tell", opts: ["Just tell him I called.", "Just say him I called.", "Just tell to him I called.", "Just tell him I call."] },
+  { word: "It's Steve Walsh, a colleague of William's.", scene: "👨‍💼🤝👨‍💼", clue: "Steve and William work together. Steve says who he is.",
+    frame: "It's Steve Walsh, a ___ of William's.", key: "colleague", opts: ["It's Steve Walsh, a colleague of William's.", "I'm Steve Walsh, William colleague.", "It's Steve Walsh, a William's colleague.", "This Steve Walsh, colleague William."] }
+];
+
+const LABELS = { next: "What comes next?", pick4: "Choose the correct phone phrase", type: "Type the missing word" };
+
+const $ = id => document.getElementById(id);
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const norm = s => s.toLowerCase().replace(/[’‘`]/g, "'").replace(/[.?!,]/g, "").replace(/\s+/g, " ").trim();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let student = "", klass = "", queue = [], idx = 0, ok = 0, no = 0, log = [], locked = false, finishedAt = null;
+
+const classValue = () => $("cls").value || "";
+const checkReady = () => { $("startBtn").disabled = !($("name").value.trim() && classValue()); };
+$("name").addEventListener("input", checkReady);
+$("cls").addEventListener("change", checkReady);
+$("startForm").addEventListener("submit", e => { e.preventDefault(); if ($("startBtn").disabled) return; student = $("name").value.trim(); klass = classValue(); start(); });
+$("againBtn").addEventListener("click", start);
+$("copyBtn").addEventListener("click", copyResult);
+
+function buildQueue() {
+  const q = [];
+  // Part 1 & 2: order each conversation, step by step (line 1 is given; the last line is placed automatically)
+  CONVOS.forEach((c, ci) => {
+    for (let pos = 1; pos < c.lines.length - 1; pos++) q.push({ t: "next", ci, pos });
+  });
+  // Part 3: phone phrases, half pick4 / half type, shuffled
+  const ph = shuffle(PHRASES).map((p, i) => ({ t: i % 2 ? "type" : "pick4", p }));
+  return q.concat(shuffle(ph));
+}
+
+function start() {
+  queue = buildQueue();
+  idx = 0; ok = 0; no = 0; log = [];
+  $("welcome").hidden = true; $("results").hidden = true; $("game").hidden = false;
+  render();
+}
+
+function bubbles(c, upto, lastNew) {
+  return c.lines.slice(0, upto).map((l, i) =>
+    `<div class="msg ${l.s}${lastNew && i === upto - 1 ? " new" : ""}"><small>${esc(c.who[l.s])}</small>${esc(l.t)}</div>`).join("");
+}
+
+function render() {
+  locked = false;
+  const item = queue[idx];
+  $("qnum").textContent = `Question ${idx + 1} / ${queue.length}`;
+  $("cOk").textContent = ok; $("cNo").textContent = no;
+  $("prog").style.width = (idx / queue.length * 100) + "%";
+  $("fb").textContent = "";
+  let h = `<div class="q"><span class="label">${esc(LABELS[item.t])}</span>`;
+  if (item.t === "next") {
+    const c = CONVOS[item.ci], right = c.lines[item.pos].t;
+    const opts = shuffle(c.lines.slice(item.pos).map(l => l.t));
+    h += `<p class="part">${esc(c.title)} · line ${item.pos + 1} of ${c.lines.length}</p>
+      <div class="chat" id="chat">${bubbles(c, item.pos, false)}<div class="msg ask" id="askMsg">❓ …</div></div>
+      <div class="opts list">` + opts.map(o => `<button class="opt" type="button" data-v="${esc(o)}">${esc(o)}</button>`).join("") + `</div>`;
+    $("qbox").innerHTML = h + `</div>`;
+    wireOpts(right, `${c.title} – line ${item.pos + 1}`, good => {
+      // show the correct line in the chat
+      const l = c.lines[item.pos];
+      $("askMsg").outerHTML = `<div class="msg ${l.s} new"><small>${esc(c.who[l.s])}</small>${esc(l.t)}</div>`;
+      // the final line falls into place on its own
+      if (item.pos === c.lines.length - 2) {
+        const last = c.lines[c.lines.length - 1];
+        setTimeout(() => $("chat").insertAdjacentHTML("beforeend", `<div class="msg ${last.s} new"><small>${esc(c.who[last.s])}</small>${esc(last.t)}</div>`), 450);
+      }
+    });
+    return;
+  }
+  const p = item.p;
+  if (item.t === "pick4") {
+    h += `<div class="scene">${p.scene}</div><p class="clue">${esc(p.clue)}</p><div class="opts list">` +
+      shuffle(p.opts).map(o => `<button class="opt" type="button" data-v="${esc(o)}">${esc(o)}</button>`).join("") + `</div>`;
+    $("qbox").innerHTML = h + `</div>`;
+    wireOpts(p.word, p.word);
+  } else {
+    const fr = esc(p.frame).replace("___", "<span>______</span>");
+    h += `<div class="scene">${p.scene}</div><p class="clue">${esc(p.clue)}</p><p class="frame">${fr}</p>
+      <p class="hint">Starts with “${esc(p.key[0])}” · ${p.key.replace(/'/g, "").length} letters${p.key.includes("'") ? " + ’" : ""}</p>
+      <form id="typeForm"><input type="text" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Your answer">
+      <button class="btn" type="submit">Check ✔</button></form>`;
+    $("qbox").innerHTML = h + `</div>`;
+    $("ans").focus();
+    $("typeForm").addEventListener("submit", e => {
+      e.preventDefault(); if (locked) return;
+      const v = norm($("ans").value); if (!v) return;
+      const good = v === norm(p.key) || v === norm(p.word) || (p.key === "it's" && v === "it is");
+      $("ans").disabled = true;
+      answer(good, p.word, `Answer: ${p.frame.replace("___", p.key)}`);
+    });
+  }
+}
+
+function wireOpts(right, logText, after) {
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+    if (locked) return;
+    const good = b.dataset.v === right;
+    document.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (x.dataset.v === right) x.classList.add("right"); });
+    if (!good) b.classList.add("wrong");
+    if (after) after(good);
+    answer(good, logText, `Answer: ${right}`);
+  }));
+}
+
+function answer(good, logText, answerText) {
+  locked = true;
+  if (good) ok++; else no++;
+  log.push({ word: logText, good });
+  $("cOk").textContent = ok; $("cNo").textContent = no;
+  $("fb").innerHTML = good ? `<span class="ok">✓ Correct!</span>` : `<span class="no">✗ ${esc(answerText)}</span>`;
+  setTimeout(() => { idx++; idx < queue.length ? render() : finish(); }, good ? 1400 : 2300);
+}
+
+const fmtDate = d => d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) + " · " + d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+const shortLog = l => l.word.length > 60 ? l.word.slice(0, 57) + "…" : l.word;
+
+function finish() {
+  finishedAt = new Date();
+  const total = queue.length, pct = Math.round(ok / total * 100), pass = pct >= 70;
+  $("game").hidden = true; $("results").hidden = false;
+  $("rcard").innerHTML = `
+    <div class="rhead"><div class="big">${TOPIC_EMOJI}</div><div><span class="label">Exercise 5</span><h1>${esc(TOPIC)}</h1></div></div>
+    <p style="margin:14px 0 0;font-weight:700">👤 ${esc(student)}${klass ? " · " + esc(klass) : ""}</p>
+    <p class="score">${ok}/${total} <span style="font-size:1.2rem;color:var(--muted)">(${pct}%)</span></p>
+    <div class="pass"><i style="width:${pct}%;background:${pass ? "var(--good)" : "var(--bad)"}"></i></div>
+    <p class="meta" style="margin:0">${pass ? "✅ Passed (70% or more)" : "🔁 Try again to reach 70%"}</p>
+    <ul class="log">${log.map(l => `<li><b class="${l.good ? "ok" : "no"}">${l.good ? "✓" : "✗"}</b><span>${esc(shortLog(l))}</span></li>`).join("")}</ul>
+    <p class="meta" style="margin:14px 0 0">📅 ${fmtDate(finishedAt)}</p>`;
+  sendResult(pct);
+}
+
+function resultText() {
+  const total = queue.length, pct = Math.round(ok / total * 100);
+  return `📋 ${LESSON}\n👤 ${student}${klass ? " (" + klass + ")" : ""}\n📊 Score: ${ok}/${total} (${pct}%)\n` +
+    log.map(l => (l.good ? "✓ " : "✗ ") + shortLog(l)).join("\n") + `\n📅 ${fmtDate(finishedAt)}`;
+}
+
+function copyResult() {
+  const t = resultText();
+  const done = () => { $("copyBtn").textContent = "✅ Copied!"; setTimeout(() => $("copyBtn").textContent = "📋 Copy result", 1800); };
+  try { navigator.clipboard.writeText(t).then(done, () => fallbackCopy(t, done)); } catch (e) { fallbackCopy(t, done); }
+}
+function fallbackCopy(t, done) {
+  const ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {} ta.remove();
+}
+
+/* ===== Send to the teacher's Google Form ===== */
+function formParams(pct) {
+  const f = RESULTS.fields, p = new URLSearchParams();
+  p.append(f.name, student);
+  p.append(f.cls, klass);
+  p.append(f.lesson, LESSON);
+  p.append(f.score, `${ok}/${queue.length} (${pct}%)`);
+  p.append(f.details, log.map(l => (l.good ? "✓ " : "✗ ") + shortLog(l)).join("; "));
+  return p;
+}
+function sendResult(pct) {
+  const st = $("status");
+  const params = formParams(pct);
+  const manual = `<a class="btn" href="${esc(RESULTS.formUrl + "viewform?usp=pp_url&" + params.toString())}" target="_blank" rel="noopener">📨 Nộp kết quả cho cô</a>`;
+  st.innerHTML = `<div class="status">⏳ Đang gửi kết quả cho cô…</div>`;
+  fetch(RESULTS.formUrl + "formResponse", { method: "POST", mode: "no-cors", body: params })
+    .then(() => { st.innerHTML = `<div class="status">✅ Đã gửi kết quả cho cô. Em không cần làm gì thêm.</div>`; })
+    .catch(() => { st.innerHTML = `<div class="status">Bấm nút dưới đây, sau đó bấm <b>Gửi / Submit</b> trên Google Form để nộp bài.${manual}</div>`; });
+}
+</script>
+
+</body></html>

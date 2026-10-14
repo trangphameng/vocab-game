@@ -35,5 +35,6 @@
  {"file": "plant-crop-review.html", "title": "Plant & crop collocations", "emoji": "🌱", "count": 12},
  {"file": "flower-grass-review.html", "title": "Flower & grass collocations", "emoji": "🌸", "count": 12},
  {"file": "tree-garden-review.html", "title": "Tree & garden collocations", "emoji": "🌳", "count": 12},
- {"file": "fence-gate-review.html", "title": "Fence & gate collocations", "emoji": "🚧", "count": 12}
+ {"file": "fence-gate-review.html", "title": "Fence & gate collocations", "emoji": "🚧", "count": 12},
+ {"file": "telephone-conversations-review.html", "title": "Telephone conversations", "emoji": "📞", "count": 15}
 ]
