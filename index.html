@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Collocation Games</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap">
+<style>
+/* Layout: one centred column, a card per game */
+:root{
+  --bg:#f3f6fb; --card:#ffffff; --fg:#1e293b; --muted:#64748b; --line:#dbe3ef;
+  --house:#0d9488; --stairs:#8b5cf6; --room:#3b82f6;
+  --font:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0b1220; --card:#131c2e; --fg:#e2e8f0; --muted:#94a3b8; --line:#26334d;
+  --house:#2dd4bf; --stairs:#a78bfa; --room:#60a5fa; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);padding:32px 16px}
+.wrap{max-width:520px;margin:0 auto;display:grid;gap:14px}
+h1{font-weight:900;font-size:1.8rem;margin:0;line-height:1.15}
+p.sub{color:var(--muted);margin:0 0 6px}
+a.game{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--fg);background:var(--card);
+  border:2px solid var(--line);border-radius:18px;padding:16px 18px;transition:border-color .15s, transform .15s}
+a.game:hover{transform:translateY(-1px)}
+a.game:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+a.game .e{font-size:2.4rem;line-height:1}
+a.game b{display:block;font-weight:900;font-size:1.15rem}
+a.game span{color:var(--muted);font-size:.92rem}
+a.game .go{margin-left:auto;font-weight:900;font-size:1.3rem}
+a.house:hover{border-color:var(--house)} a.house .go{color:var(--house)}
+a.stairs:hover{border-color:var(--stairs)} a.stairs .go{color:var(--stairs)}
+a.room:hover{border-color:var(--room)} a.room .go{color:var(--room)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div>
+    <h1>Collocation Games</h1>
+    <p class="sub">Chọn bài để bắt đầu. Làm xong, điểm tự gửi về cho cô.</p>
+  </div>
+  <!-- GAMES -->
+  <a class="game house" href="house-review.html"><div class="e">🏠</div><div><b>House collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+  <a class="game stairs" href="stairs-review.html"><div class="e">🪜</div><div><b>Stairs collocations</b><span>10 expressions</span></div><div class="go">▶</div></a>
+  <a class="game room" href="room-review.html"><div class="e">🚪</div><div><b>Room collocations</b><span>12 expressions</span></div><div class="go">▶</div></a>
+</main>
+</body>
+</html>
